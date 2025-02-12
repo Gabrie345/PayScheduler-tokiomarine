@@ -3,7 +3,7 @@ package br.com.tokiomarine.payschedulertokiomarine.service.model;
 
 import javax.persistence.*;
 
-@Table(name = "TaxRate")
+@Table(name = "TAX_RATE")
 @Entity
 public class TaxModel {
     @Id
