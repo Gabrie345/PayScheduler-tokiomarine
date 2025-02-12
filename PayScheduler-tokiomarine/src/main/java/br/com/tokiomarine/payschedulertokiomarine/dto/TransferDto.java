@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 
 import java.time.LocalDate;
@@ -21,6 +22,7 @@ public class TransferDto {
     @Size(min = 10, max = 10, message = "A conta origem deve ter exatamente 10 caracteres")
     private String destinationAccount;
 
+    @Positive(message = "O valor deve ser maior que 0")
     @JsonProperty("valor")
     @NotNull(message = "o valor é obrigatório")
     private double value;

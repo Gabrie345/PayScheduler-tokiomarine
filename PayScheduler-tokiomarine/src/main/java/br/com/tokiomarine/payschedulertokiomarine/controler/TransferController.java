@@ -6,10 +6,7 @@ import br.com.tokiomarine.payschedulertokiomarine.service.TransferService;
 import br.com.tokiomarine.payschedulertokiomarine.service.model.TransferModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -22,14 +19,14 @@ public class TransferController {
     private TransferService service;
 
     @PostMapping
-    public ResponseEntity<TransferDto> transfer (@Valid @RequestBody TransferDto transfer){
-
-        return ResponseEntity.ok().body(transfer);
+    public ResponseEntity<TransferModel> transfer (@Valid @RequestBody TransferDto transfer){
+        TransferModel transferModel = service.newTransfer(transfer);
+        return ResponseEntity.ok().body(transferModel);
     }
 
-    @PostMapping
-    public ResponseEntity<List<TransferModel>> listTransfers (String account){
-        //ResponseEntity.ok(service.findAll());
-        return null;
+    @PostMapping(value = "Listar")
+    public ResponseEntity<List<TransferModel>> listTransfers (@RequestParam String account){
+        List<TransferModel> transferModels = service.filterByOriginAccount(account);
+        return ResponseEntity.ok().body(transferModels);
     }
 }
