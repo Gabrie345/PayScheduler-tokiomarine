@@ -3,6 +3,7 @@ package br.com.tokiomarine.payschedulertokiomarine.constants;
 public class MessageConstants {
 
     public static final String TAX_NOT_FOUND = "Taxa não encontrada para o período especificado.";
+    public static final String ACCOUNT_NOT_FOUND = "conta não encontrada para o período especificado.";
     public static final String INVALID_DATE = "A data fornecida é inválida.";
     public static final String ERROR = "error";
 

@@ -5,6 +5,7 @@ import br.com.tokiomarine.payschedulertokiomarine.dto.TransferDto;
 import br.com.tokiomarine.payschedulertokiomarine.service.TransferService;
 import br.com.tokiomarine.payschedulertokiomarine.service.model.TransferModel;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,10 +22,10 @@ public class TransferController {
     @PostMapping
     public ResponseEntity<TransferModel> transfer (@Valid @RequestBody TransferDto transfer){
         TransferModel transferModel = service.newTransfer(transfer);
-        return ResponseEntity.ok().body(transferModel);
+        return ResponseEntity.status(HttpStatus.CREATED).body(transferModel);
     }
 
-    @GetMapping(value = "listar")
+    @GetMapping(value = "listar/{account}")
     public ResponseEntity<List<TransferModel>> listTransfers (@PathVariable String account){
         List<TransferModel> transferModels = service.filterByOriginAccount(account);
         return ResponseEntity.ok().body(transferModels);

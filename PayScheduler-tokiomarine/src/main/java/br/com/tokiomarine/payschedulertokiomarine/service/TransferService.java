@@ -2,7 +2,7 @@ package br.com.tokiomarine.payschedulertokiomarine.service;
 
 import br.com.tokiomarine.payschedulertokiomarine.constants.MessageConstants;
 import br.com.tokiomarine.payschedulertokiomarine.dto.TransferDto;
-import br.com.tokiomarine.payschedulertokiomarine.exceptions.TaxNotFoundException;
+import br.com.tokiomarine.payschedulertokiomarine.exceptions.NotFoundException;
 import br.com.tokiomarine.payschedulertokiomarine.repository.TaxRepository;
 import br.com.tokiomarine.payschedulertokiomarine.repository.TransferRepository;
 import br.com.tokiomarine.payschedulertokiomarine.service.mapper.TransferMapper;
@@ -25,10 +25,10 @@ public class TransferService {
     @Autowired
     private TaxRepository taxRepository;
 
-    public TransferModel newTransfer(TransferDto transferDto) throws TaxNotFoundException {
+    public TransferModel newTransfer(TransferDto transferDto) throws NotFoundException {
 
         Optional<TaxModel> taxBetween = taxRepository.findTaxBetween(calculateDaysBetween(LocalDate.now(), transferDto.getAppointmentDate()));
-        TaxModel taxModel = taxBetween.orElseThrow(() -> new TaxNotFoundException(MessageConstants.TAX_NOT_FOUND));
+        TaxModel taxModel = taxBetween.orElseThrow(() -> new NotFoundException(MessageConstants.TAX_NOT_FOUND));
         TransferModel transferModel = new TransferMapper().transferDtotoTransferModel(transferDto);
         transferModel.setTaxModel(taxModel);
 
@@ -37,7 +37,9 @@ public class TransferService {
     }
 
     public List<TransferModel> filterByOriginAccount(String originAccount) {
-        return repository.findAllByOriginAccount(originAccount);
+        List<TransferModel> transfers = repository.findAllByOriginAccount(originAccount);
+        if(transfers.isEmpty()) throw new NotFoundException(MessageConstants.ACCOUNT_NOT_FOUND);
+        return transfers;
     }
 
     public static long calculateDaysBetween(LocalDate startDate, LocalDate endDate) {
