@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
+import io.swagger.annotations.ApiModelProperty;
+
 
 import java.time.LocalDate;
 
@@ -15,21 +17,25 @@ public class TransferDto {
     @JsonProperty("conta_origem")
     @NotNull(message = "a conta origem é obrigatório")
     @Size(min = 10, max = 10, message = "A conta origem deve ter exatamente 10 caracteres")
+    @ApiModelProperty(value = "Número da conta de origem", example = "1234567890")
     private String OriginAccount;
 
     @NotNull(message = "a conta destino é obrigatório ")
     @JsonProperty("conta_destino")
     @Size(min = 10, max = 10, message = "A conta origem deve ter exatamente 10 caracteres")
+    @ApiModelProperty(value = "Número da conta de destino alfanumérico", example = "A987654321")
     private String destinationAccount;
 
     @Positive(message = "O valor deve ser maior que 0")
     @JsonProperty("valor")
     @NotNull(message = "o valor é obrigatório")
+    @ApiModelProperty(value = "Valor da transferência", example = "1500.00")
     private double value;
 
     @JsonProperty("data_Agendamento")
     @NotNull(message = "a data de agendamento é obrigatório")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
+    @ApiModelProperty(value = "Data da transferência", example = "20/02/2025")
     private LocalDate appointmentDate;
 
 
