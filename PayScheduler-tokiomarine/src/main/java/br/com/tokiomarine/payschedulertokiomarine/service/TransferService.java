@@ -1,6 +1,8 @@
 package br.com.tokiomarine.payschedulertokiomarine.service;
 
+import br.com.tokiomarine.payschedulertokiomarine.constants.MessageConstants;
 import br.com.tokiomarine.payschedulertokiomarine.dto.TransferDto;
+import br.com.tokiomarine.payschedulertokiomarine.exceptions.TaxNotFoundException;
 import br.com.tokiomarine.payschedulertokiomarine.repository.TaxRepository;
 import br.com.tokiomarine.payschedulertokiomarine.repository.TransferRepository;
 import br.com.tokiomarine.payschedulertokiomarine.service.mapper.TransferMapper;
@@ -23,10 +25,10 @@ public class TransferService {
     @Autowired
     private TaxRepository taxRepository;
 
-    public TransferModel newTransfer(TransferDto transferDto) {
+    public TransferModel newTransfer(TransferDto transferDto) throws TaxNotFoundException {
 
         Optional<TaxModel> taxBetween = taxRepository.findTaxBetween(calculateDaysBetween(LocalDate.now(), transferDto.getAppointmentDate()));
-        TaxModel taxModel = taxBetween.orElseThrow();
+        TaxModel taxModel = taxBetween.orElseThrow(() -> new TaxNotFoundException(MessageConstants.TAX_NOT_FOUND));
         TransferModel transferModel = new TransferMapper().transferDtotoTransferModel(transferDto);
         transferModel.setTaxModel(taxModel);
 
@@ -40,7 +42,7 @@ public class TransferService {
 
     public static long calculateDaysBetween(LocalDate startDate, LocalDate endDate) {
         if (startDate == null || endDate == null) {
-            throw new IllegalArgumentException("As datas não podem ser nulas.");
+            throw new IllegalArgumentException(MessageConstants.INVALID_DATE);
         }
         return ChronoUnit.DAYS.between(startDate, endDate);
     }

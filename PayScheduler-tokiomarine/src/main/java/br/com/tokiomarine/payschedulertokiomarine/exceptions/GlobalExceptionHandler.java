@@ -1,5 +1,6 @@
 package br.com.tokiomarine.payschedulertokiomarine.exceptions;
 
+import br.com.tokiomarine.payschedulertokiomarine.constants.MessageConstants;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -22,5 +23,10 @@ public class GlobalExceptionHandler {
         }
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
+    }
+
+    @ExceptionHandler(TaxNotFoundException.class)
+    public ResponseEntity<Map<String, String>> handleTaxNotFoundException(TaxNotFoundException ex) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of(MessageConstants.ERROR, ex.getMessage()));
     }
 }
