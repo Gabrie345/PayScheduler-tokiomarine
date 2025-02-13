@@ -24,8 +24,8 @@ public class TransferController {
         return ResponseEntity.ok().body(transferModel);
     }
 
-    @PostMapping(value = "Listar")
-    public ResponseEntity<List<TransferModel>> listTransfers (@RequestParam String account){
+    @GetMapping(value = "listar")
+    public ResponseEntity<List<TransferModel>> listTransfers (@PathVariable String account){
         List<TransferModel> transferModels = service.filterByOriginAccount(account);
         return ResponseEntity.ok().body(transferModels);
     }

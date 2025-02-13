@@ -5,6 +5,7 @@ import br.com.tokiomarine.payschedulertokiomarine.dto.TaxDto;
 import br.com.tokiomarine.payschedulertokiomarine.service.TaxService;
 import br.com.tokiomarine.payschedulertokiomarine.service.model.TaxModel;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,7 +25,8 @@ public class TaxController {
     public ResponseEntity<TaxModel> saveTax (@Valid @RequestBody TaxDto taxDto){
 
         TaxModel taxModel = taxService.saveTax(taxDto);
-        return ResponseEntity.ok().body(taxModel);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(taxModel);
     }
 
 }
