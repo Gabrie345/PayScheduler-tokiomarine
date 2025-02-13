@@ -14,13 +14,13 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping(value="tax")
+@RequestMapping(value="taxas")
 public class TaxController {
 
     @Autowired
     private TaxService taxService;
 
-    @PostMapping(value="save")
+    @PostMapping(value="cadastrar")
     public ResponseEntity<TaxModel> saveTax (@Valid @RequestBody TaxDto taxDto){
 
         TaxModel taxModel = taxService.saveTax(taxDto);

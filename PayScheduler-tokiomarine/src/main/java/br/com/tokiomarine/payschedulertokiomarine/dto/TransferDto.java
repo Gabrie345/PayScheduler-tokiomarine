@@ -33,6 +33,16 @@ public class TransferDto {
     private LocalDate appointmentDate;
 
 
+    public TransferDto(String originAccount, String destinationAccount, double value, LocalDate appointmentDate) {
+        OriginAccount = originAccount;
+        this.destinationAccount = destinationAccount;
+        this.value = value;
+        this.appointmentDate = appointmentDate;
+    }
+
+    public TransferDto() {
+    }
+
     public String getOriginAccount() {
         return OriginAccount;
     }

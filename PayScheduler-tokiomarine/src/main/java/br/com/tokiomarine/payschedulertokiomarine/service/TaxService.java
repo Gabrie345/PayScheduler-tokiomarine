@@ -16,6 +16,6 @@ public class TaxService {
     public TaxModel saveTax(TaxDto taxDto) {
         TaxModel taxModel = new TaxMapper().taxDtotoTaxModel(taxDto);
         return taxRepository.save(taxModel);
-
     }
+
 }

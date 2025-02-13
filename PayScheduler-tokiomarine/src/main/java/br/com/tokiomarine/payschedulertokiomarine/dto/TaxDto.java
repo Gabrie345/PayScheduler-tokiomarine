@@ -27,6 +27,16 @@ public class TaxDto {
     @JsonProperty("taxa")
     private double tax;
 
+    public TaxDto(int minDays, int maxDays, double value, double tax) {
+        this.minDays = minDays;
+        this.maxDays = maxDays;
+        this.value = value;
+        this.tax = tax;
+    }
+
+    public TaxDto() {
+    }
+
     public double getTax() {
         return tax;
     }
