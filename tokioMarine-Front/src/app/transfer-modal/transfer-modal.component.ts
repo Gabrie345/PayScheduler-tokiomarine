@@ -5,14 +5,26 @@ import { MatTableDataSource } from '@angular/material/table';
 import { CommonModule } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { ApiService } from '../service/api.service';
 
-// Interface para tipagem dos dados
-interface Transfer {
-  appointmentDate: Date;
-  dateTransfer: Date;
-  destinationAccount: string;
+interface TaxModel {
+  id: number;
+  maxDays: number;
+  minDays: number;
   tax: number;
-  totalValue: number;
+  value: number;
+}
+
+interface Transfer {
+  id: number;
+  appointmentDate: string;  
+  dateTransfer: string;
+  destinationAccount: string;
+  originAccount: string;
+  value: number;
+  taxModel: TaxModel;
+  tax?: number; 
+  totalValue?: number; 
 }
 
 @Component({
@@ -24,9 +36,10 @@ interface Transfer {
     CommonModule,
     MatTableModule,
     MatPaginatorModule,
-    MatDialogModule 
+    MatDialogModule
   ]
 })
+
 export class TransferModalComponent implements AfterViewInit {
   displayedColumns: string[] = ['appointmentDate', 'dateTransfer', 'destinationAccount', 'tax', 'totalValue'];
   dataSource = new MatTableDataSource<Transfer>([]);
@@ -37,37 +50,40 @@ export class TransferModalComponent implements AfterViewInit {
 
   constructor(
     public dialogRef: MatDialogRef<TransferModalComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any
+    private apiService: ApiService,
+    @Inject(MAT_DIALOG_DATA) public data: { account: string }
   ) {
-    this.generateMockData();
-  }
 
+  }
   ngAfterViewInit() {
+    this.request('0123456789')
     this.dataSource.paginator = this.paginator;
   }
 
-  // Geração de dados mockados
-  private generateMockData(): void {
-    const mockTransfers: Transfer[] = [];
-    
-    for (let i = 1; i <= 15; i++) {
-      mockTransfers.push({
-        appointmentDate: new Date(2024, 0, i),
-        dateTransfer: new Date(2024, 0, i, 12, 0),
-        destinationAccount: `${'0123456789' + i}`,
-        tax: i * 1.5,
-        totalValue: 1000 + (i * 100)
-      });
-    }
-
-    this.dataSource.data = mockTransfers;
-    this.totalItems = mockTransfers.length;
+  request(account: string): void {
+    this.apiService.listTransfers(account).subscribe(
+      response => {
+        this.dataSource.data = response.map((item: Transfer) => ({
+          ...item,
+          dateTransfer: this.convertDate(item.dateTransfer),
+          appointmentDate: this.convertDate(item.appointmentDate),
+          tax: item.taxModel.tax, 
+          totalValue: item.value + item.taxModel.value 
+        }));
+        this.totalItems = response.length; 
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 
-  // Manipulador de mudança de página
+  convertDate(dateStr: string): Date {
+    const [day, month, year] = dateStr.split('/').map(Number);
+    return new Date(year, month - 1, day); 
+  }
   onPageChange(event: PageEvent): void {
     this.pageSize = event.pageSize;
-    // Aqui você implementaria a lógica para carregar mais dados do servidor se necessário
   }
 
   close(): void {
