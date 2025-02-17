@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "proxyConfig": "proxy.conf.json",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:tokioMarine-Front": "node dist/tokio-marine-front/server/server.mjs"
