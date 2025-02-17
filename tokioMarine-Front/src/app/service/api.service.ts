@@ -11,7 +11,10 @@ export class ApiService {
   
   constructor(private http: HttpClient) { }
 
-  salvarTransferencia(data: any): Observable<any> {
+  saveTransfer(data: any): Observable<any> {
     return this.http.post(`${this.baseUrl}/transferencia`, data); 
+  }
+  listTransfers(account: string): Observable<any> {
+    return this.http.get(`${this.baseUrl}/transferencia/listar/${account}`);
   }
 }

@@ -8,6 +8,7 @@ import { NgxCurrencyDirective } from "ngx-currency";
 import { CommonModule } from '@angular/common';
 import { ApiService } from '../service/api.service';
 import { ConfirmationPopComponent } from '../confirmation-pop/confirmation-pop.component';
+import { MatTableModule } from '@angular/material/table';
 
 
 @Component({
@@ -24,6 +25,7 @@ import { ConfirmationPopComponent } from '../confirmation-pop/confirmation-pop.c
     FormsModule,
     ReactiveFormsModule,
     NgxCurrencyDirective,
+    MatTableModule
   ],
   providers:[
     ApiService,
@@ -52,7 +54,7 @@ export class ScheduleTransferComponent {
 
   onSave() {
     this.transfer.data_Agendamento = this.dateFormart(this.transfer.data_Agendamento);
-    this.apiService.salvarTransferencia(this.transfer).subscribe(
+    this.apiService.saveTransfer(this.transfer).subscribe(
       response => {
         this.popupConfirmation('Transferência salva com sucesso', 'sucesso');
       },
