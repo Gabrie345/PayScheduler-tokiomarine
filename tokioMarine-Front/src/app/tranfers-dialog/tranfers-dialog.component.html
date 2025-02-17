@@ -76,6 +76,8 @@
   </form>
 </mat-dialog-content>
 <mat-dialog-actions>
-  <button mat-button type="button" class="btn-cancel" (click)="onCancel()">Cancelar</button>
-  <button mat-button type="button" class="btn-save" (click)="onSave()" [disabled]="transferForm.invalid">Salvar</button>
+  <div style="display: flex; justify-content: flex-end; width: 100%;">
+    <button mat-button type="button" class="btn-cancel" (click)="onCancel()">Cancelar</button>
+    <button mat-button type="button" class="btn-save" (click)="onSave()" [disabled]="transferForm.invalid">Salvar</button>
+  </div>
 </mat-dialog-actions>

@@ -1,0 +1,23 @@
+<mat-dialog-content
+  [ngClass]="data.tipo === 'sucesso' ? 'success-modal' : 'error-modal'">
+  <div class="modal-message-container">
+    <mat-icon 
+      class="modal-icon" 
+      [ngClass]="data.tipo === 'sucesso' ? 'success-icon' : 'error-icon'">
+      {{ data.tipo === 'sucesso' ? 'check_circle' : 'error' }}
+    </mat-icon>
+    <p 
+      class="modal-message" 
+      [ngClass]="data.tipo === 'sucesso' ? 'success-message' : 'error-message'">
+      {{ data.mensagem }}
+    </p>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions
+  [ngClass]="data.tipo === 'sucesso' ? 'success-modal-actions' : 'error-modal-actions'">
+  <div style="display: flex; justify-content: center; width: 100%;">
+    <button mat-button class="btn" (click)="verTransferencias()">Ver todas as transferências</button>
+    <button mat-button type="button" class="btn" (click)="onCancel()">Fechar</button>
+  </div>
+</mat-dialog-actions>

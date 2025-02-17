@@ -1,0 +1,57 @@
+.modal-message-container {
+  display: flex;
+  align-items: center; 
+}
+
+.modal-icon {
+  margin-right: 8px; 
+}
+
+.success-modal {
+  background-color: rgba(0, 255, 0, 0.2);
+}
+
+.error-modal {
+  background-color: rgba(255, 0, 0, 0.1); 
+}
+
+.success-modal-actions {
+  background-color: rgba(0, 255, 0, 0.2);
+}
+
+.error-modal-actions {
+  background-color: rgba(255, 0, 0, 0.1); 
+}
+
+.success-icon, .success-message {
+  color: green; 
+}
+
+.error-icon, .error-message {
+  color: red; 
+}
+
+button {
+  color: #1976d2 !important;
+  font-weight: bold !important;
+  border-radius: 30px !important; 
+  padding: 10px 16px !important;
+  transition: background-color 0.3s ease, transform 0.1s ease !important;
+  border: 2px solid #1976d2 !important;
+  cursor: pointer !important;
+}
+.btn{
+  background-color: white !important;
+
+}
+.btn:hover {
+  background-color: #bbdefb !important;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2)  !important;
+}
+.btn:active {
+  background-color: #90caf9 !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2) !important;
+}
+button.btn {
+  margin: 0 8px; 
+}
