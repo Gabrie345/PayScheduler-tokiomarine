@@ -5,6 +5,7 @@ Este é um sistema de agendamento de transferências financeiras desenvolvido co
 ## Tecnologias Utilizadas
 - **Java 11**
 - **Spring Boot**
+- **mockito**
 - **H2 Database**
 - **Swagger**
 - **Maven**
