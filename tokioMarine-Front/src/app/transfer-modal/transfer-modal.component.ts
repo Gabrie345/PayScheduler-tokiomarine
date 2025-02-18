@@ -56,7 +56,7 @@ export class TransferModalComponent implements AfterViewInit {
 
   }
   ngAfterViewInit() {
-    this.request('0123456789')
+    this.request(this.data.account)
     this.dataSource.paginator = this.paginator;
   }
 
@@ -77,7 +77,7 @@ export class TransferModalComponent implements AfterViewInit {
       }
     );
   }
-
+  
   convertDate(dateStr: string): Date {
     const [day, month, year] = dateStr.split('/').map(Number);
     return new Date(year, month - 1, day); 

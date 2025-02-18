@@ -27,7 +27,7 @@ export class AppComponent {
     const dialogRef = this.dialog.open(TransferModalComponent, {
       width: '800px',
       maxWidth: '90vw',
-      data: {} 
+      data: {account:"0123456789"} 
     });
   }
 }
