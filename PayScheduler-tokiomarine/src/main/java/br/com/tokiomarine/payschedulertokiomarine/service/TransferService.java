@@ -8,9 +8,13 @@ import br.com.tokiomarine.payschedulertokiomarine.repository.TransferRepository;
 import br.com.tokiomarine.payschedulertokiomarine.service.mapper.TransferMapper;
 import br.com.tokiomarine.payschedulertokiomarine.service.model.TaxModel;
 import br.com.tokiomarine.payschedulertokiomarine.service.model.TransferModel;
+import br.com.tokiomarine.payschedulertokiomarine.validation.repository.AccountUserRepository;
+import br.com.tokiomarine.payschedulertokiomarine.validation.service.model.AccountUserModel;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
@@ -25,12 +29,26 @@ public class TransferService {
     @Autowired
     private TaxRepository taxRepository;
 
+    @Autowired
+    private AccountUserRepository accountUserRepository;
+
     public TransferModel newTransfer(TransferDto transferDto) throws NotFoundException {
+
+        AccountUserModel originAccount = accountUserRepository.findByOriginAccount(transferDto.getOriginAccount());
+        double balanceParse = originAccount.getBalance().doubleValue();
+
+        if (transferDto.getValue()>balanceParse) {
+            throw new NotFoundException(MessageConstants.NO_BALANCE);
+        }
 
         Optional<TaxModel> taxBetween = taxRepository.findTaxBetween(calculateDaysBetween(LocalDate.now(), transferDto.getAppointmentDate()));
         TaxModel taxModel = taxBetween.orElseThrow(() -> new NotFoundException(MessageConstants.TAX_NOT_FOUND));
         TransferModel transferModel = new TransferMapper().transferDtotoTransferModel(transferDto);
         transferModel.setTaxModel(taxModel);
+
+
+        double newBalance = (transferDto.getValue() - balanceParse);
+        accountUserRepository.updateBalance( originAccount.getOriginAccount(), BigDecimal.valueOf(newBalance));
 
         return repository.save(transferModel);
 
