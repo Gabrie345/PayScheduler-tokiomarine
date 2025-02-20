@@ -1,15 +1,13 @@
 # Transferência Financeira - API
 
-Este é um sistema de agendamento de transferências financeiras desenvolvido com Spring Boot.
+![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)
+![Spring](https://img.shields.io/badge/spring-%236DB33F.svg?style=for-the-badge&logo=spring&logoColor=white)
+![JWT](https://img.shields.io/badge/JWT-black?style=for-the-badge&logo=JSON%20web%20tokens)
+![Mockito](https://img.shields.io/badge/mockito-%230076.svg?style=for-the-badge&logo=mockito&logoColor=white)
+![Angular](https://img.shields.io/badge/angular-%23DD0031.svg?style=for-the-badge&logo=angular&logoColor=white)
 
-## Tecnologias Utilizadas
-- **Java 11**
-- **Spring Boot**
-- **mockito**
-- **H2 Database**
-- **Swagger**
-- **Maven**
-- **Angular**
+<h2 id="started">📌 Sobre</h2>
+Este é um sistema de agendamento de transferências financeiras desenvolvido com Spring Boot.
 
 ## Como Executar o Projeto Localmente
 
@@ -39,7 +37,24 @@ Este é um sistema de agendamento de transferências financeiras desenvolvido co
 
 ## Endpoints Disponíveis
 
+
+**Endpoint:** `POST localhost:8080/authentication/register`
+- Descrição: Permite cadastrar uma conta.
+{
+  "name": "gabriel silva ",
+  "cpf": "4887864003",
+  "password": "147A5B4A7g"
+}
+**Endpoint:** `POST localhost:8080/authentication/login`
+- Descrição: Permite realizar o login.
+{
+  "cpf": "4887864003",
+  "password": "147A5B4A7g"
+}
+gera o BearToken
+
 ### 1. Cadastrar Taxas
+
 **Endpoint:** `POST /taxas/cadastrar`
 
 - Descrição: Permite cadastrar taxas para transferências.
