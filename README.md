@@ -1,4 +1,6 @@
-# Transferência Financeira - API
+<h2 id="started">📌 Sobre</h2>
+Este é um sistema de agendamento de transferências financeiras desenvolvido com Spring Boot.
+
 
 ![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)
 ![Spring](https://img.shields.io/badge/spring-%236DB33F.svg?style=for-the-badge&logo=spring&logoColor=white)
@@ -6,15 +8,15 @@
 ![Mockito](https://img.shields.io/badge/mockito-%230076.svg?style=for-the-badge&logo=mockito&logoColor=white)
 ![Angular](https://img.shields.io/badge/angular-%23DD0031.svg?style=for-the-badge&logo=angular&logoColor=white)
 
-<h2 id="started">📌 Sobre</h2>
-Este é um sistema de agendamento de transferências financeiras desenvolvido com Spring Boot.
 
-## Como Executar o Projeto Localmente
 ## Tecnologias Utilizadas
 - **Java 11**
 - **Spring Boot 2.7.0**
 - **Maven 3.9.9**
 - **Angular 19.1.7**
+
+## Como Executar o Projeto Localmente
+
 
 ### Backend (API)
 1. Clone o repositório
