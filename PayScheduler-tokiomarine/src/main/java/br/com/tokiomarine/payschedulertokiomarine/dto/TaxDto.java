@@ -8,9 +8,10 @@ import io.swagger.annotations.ApiModelProperty;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
+import java.io.Serializable;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class TaxDto {
+public class TaxDto  implements Serializable {
 
     @NotNull(message = "o min days é obrigatório ")
     @JsonProperty("min_days")

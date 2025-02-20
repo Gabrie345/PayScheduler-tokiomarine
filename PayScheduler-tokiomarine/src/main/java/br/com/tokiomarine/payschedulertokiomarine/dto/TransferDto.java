@@ -9,10 +9,11 @@ import javax.validation.constraints.Size;
 import io.swagger.annotations.ApiModelProperty;
 
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class TransferDto {
+public class TransferDto  implements Serializable {
 
     @JsonProperty("conta_origem")
     @NotNull(message = "a conta origem é obrigatório")
