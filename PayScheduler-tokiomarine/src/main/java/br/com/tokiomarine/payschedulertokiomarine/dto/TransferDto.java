@@ -1,14 +1,13 @@
 package br.com.tokiomarine.payschedulertokiomarine.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import io.swagger.annotations.ApiModelProperty;
+
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
-import io.swagger.annotations.ApiModelProperty;
-
-
 import java.io.Serializable;
 import java.time.LocalDate;
 
