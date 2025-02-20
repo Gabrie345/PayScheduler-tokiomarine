@@ -12,12 +12,21 @@ Este é um sistema de agendamento de transferências financeiras desenvolvido co
 - **Angular**
 
 ## Como Executar o Projeto Localmente
+## Tecnologias Utilizadas
+- **Java 11**
+- **Spring Boot 2.7.0**
+- **Maven 3.9.9**
+- **Angular 19.1.7**
 
 ### Backend (API)
 1. Clone o repositório
 
 2. Compile e execute o projeto:
-   ```sh
+
+    ```sh
+   mvn clean install
+   ```
+    ```sh
    mvn spring-boot:run
    ```
 3. A API estará disponível em `http://localhost:8080`
