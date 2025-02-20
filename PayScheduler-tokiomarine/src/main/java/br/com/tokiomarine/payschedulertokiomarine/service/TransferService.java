@@ -11,7 +11,6 @@ import br.com.tokiomarine.payschedulertokiomarine.service.model.TransferModel;
 import br.com.tokiomarine.payschedulertokiomarine.validation.repository.AccountUserRepository;
 import br.com.tokiomarine.payschedulertokiomarine.validation.service.model.AccountUserModel;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
