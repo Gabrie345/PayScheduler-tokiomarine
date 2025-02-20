@@ -43,6 +43,11 @@ export class AppComponent {
       width: '400px', 
       data: {} 
     });
+    dialogRef.afterClosed().subscribe(result => {
+      if (localStorage.getItem('token')!='') {
+        this.validaToken();
+      }
+    });
   }
 
   openDialog() {
@@ -62,7 +67,8 @@ export class AppComponent {
       data: {originAccount: localStorage.getItem('originAccount')} 
     });
     dialogRef.afterClosed().subscribe(result => {
-      this.validaToken();
+        this.validaToken();
+      
     });
   }
 

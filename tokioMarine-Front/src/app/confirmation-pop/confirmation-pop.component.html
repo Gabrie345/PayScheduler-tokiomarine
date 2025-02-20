@@ -17,7 +17,7 @@
 <mat-dialog-actions
   [ngClass]="data.tipo === 'sucesso' ? 'success-modal-actions' : 'error-modal-actions'">
   <div style="display: flex; justify-content: center; width: 100%;">
-    <button mat-button class="btn" (click)="listTranfers()">Ver todas as transferências</button>
     <button mat-button type="button" class="btn" (click)="onCancel()">Fechar</button>
+    <button mat-button type="button" class="btn" (click)="onCancel()">Ok</button>
   </div>
 </mat-dialog-actions>

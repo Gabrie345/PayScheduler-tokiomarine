@@ -35,10 +35,5 @@ onCancel() {
     private dialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) public data: { mensagem: string, tipo: 'sucesso' | 'erro' }
   ) {}
-  listTranfers() {
-    const dialogRef = this.dialog.open(TransferModalComponent, {
-      data: { originAccount: localStorage.getItem('originAccount') },
-      width: '800px',
-      maxWidth: '90vw'
-    })}
+
 }

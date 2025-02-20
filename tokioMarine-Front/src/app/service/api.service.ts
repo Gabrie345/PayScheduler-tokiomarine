@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { catchError, Observable, throwError } from 'rxjs';
 
 
 
@@ -28,15 +28,34 @@ export class ApiService {
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${barToken}` 
     });
-    return this.http.post(`${this.baseUrl}/transferencia`, data, { headers }); 
+    return this.http.post(`${this.baseUrl}/transferencia`, data, { headers })
+    .pipe(
+      catchError((error) => {
+        if (error.status === 403) {
+          const errorMessage = error?.error?.error || 'Erro de autenticação';
+          return throwError(() => new Error(errorMessage));
+        }
+        return throwError(() => error);
+      })
+    ); 
   }
 
   listTransfers(account: string): Observable<any> {
-    const barToken = localStorage.getItem('token')
+    const barToken = localStorage.getItem('token');
     const headers = new HttpHeaders({
-      'Authorization': `Bearer ${barToken}` 
+      'Authorization': `Bearer ${barToken}`
     });
-    return this.http.get(`${this.baseUrl}/transferencia/listar/${account}`,{ headers });
+  
+    return this.http.get(`${this.baseUrl}/transferencia/listar/${account}`, { headers })
+      .pipe(
+        catchError((error) => {
+          if (error.status === 403) {
+            const errorMessage = 'Erro de autenticação';
+            return throwError(() => new Error(errorMessage));
+          }
+          return throwError(() => error);
+        })
+      );
   }
 
   register(data: any): Observable<any> {
