@@ -36,13 +36,15 @@ public class AuthenticationController {
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(data.getCpf(), data.getPassword());
         Authentication authenticate = authenticationManager.authenticate(authenticationToken);
         String token = tokenService.generateToken((AccountUserModel) authenticate.getPrincipal());
-        return ResponseEntity.ok(token);
+        ((AccountUserModel) authenticate.getPrincipal()).setPassword(token);
+        return ResponseEntity.ok(authenticate.getPrincipal());
     }
 
     @PostMapping("/register")
     public ResponseEntity<AccountUserModel> register(@RequestBody @Valid AccountUserDto data){
         AccountUserModel accountUser = serviceAuthorization.userRegistration(data);
         return ResponseEntity.ok(accountUser);
+
     }
 
 }

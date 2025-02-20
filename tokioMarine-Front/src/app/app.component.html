@@ -1,15 +1,32 @@
 <mat-card appearance="outlined" class="card-maior">
+  <div *ngIf="isLoggedIn" class="header">
+    <span class="user-info" >
+      <p class="account-number">Conta: {{accountNumber}}</p> 
+        <p class="account-number">Saldo: R$ {{ balance }}</p> 
+        <div class="logoutArea">
+          <button class="btnLogout" (click)="logout()">Sair</button>
+        </div>
+    </span>
+  </div>
   <mat-card-content class="card">
     <div class="container">
       <h1>Agendamento de Pagamentos Tokio Marine</h1>
+      <div *ngIf="isLoggedIn; else notLoggedIn">
       <div class="botoes">
-        <button mat-raised-button color="primary" (click)="openDialog()" aria-label="Agendar Transferência">
+        <button class="btn" mat-raised-button color="primary" (click)="openDialog()" aria-label="Agendar Transferência">
           Agendar Transferência
         </button>
-        <button mat-raised-button color="accent" (click)="listTranfers()" aria-label="Listar Transferências">
+        <button class="btn" mat-raised-button color="accent" (click)="listTranfers()" aria-label="Listar Transferências">
           Listar Transferências
         </button>
       </div>
+    </div>
+    <ng-template #notLoggedIn>
+      <div class="botoes">
+        <button mat-button class="btn" (click)="login()">Login</button>
+        <button mat-button class="btn" (click)="register()">Cadastro</button>
+      </div>
+    </ng-template>
     </div>
   </mat-card-content>
 </mat-card>

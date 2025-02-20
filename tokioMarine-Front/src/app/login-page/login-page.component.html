@@ -1,0 +1,49 @@
+<h2 mat-dialog-title>Login</h2>
+<mat-dialog-content>
+  <form #loginForm="ngForm">
+    
+    <mat-form-field class="input-form">
+      <mat-label>CPF</mat-label>
+      <input
+        matInput
+        maxlength="11"
+        minlength="11"
+        [(ngModel)]="login.cpf"
+        name="cpf"
+        #cpf="ngModel"
+        required
+        pattern="^[0-9]{11}$"
+      >
+      <mat-error *ngIf="cpf.invalid && (cpf.dirty || cpf.touched)">
+        <span *ngIf="cpf.errors?.['required']">CPF é obrigatório.</span>
+        <span *ngIf="cpf.errors?.['pattern']">O CPF deve conter 11 dígitos numéricos.</span>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="input-form">
+      <mat-label>Senha</mat-label>
+      <input
+        matInput
+        type="password"
+        [(ngModel)]="login.password"
+        name="password"
+        #password="ngModel"
+        required
+        minlength="8"
+      >
+      <mat-error *ngIf="password.invalid && (password.dirty || password.touched)">
+        <span *ngIf="password.errors?.['required']">Senha é obrigatória.</span>
+        <span *ngIf="password.errors?.['minlength']">A senha deve ter pelo menos 8 caracteres.</span>
+      </mat-error>
+    </mat-form-field>
+    
+  </form>
+  <p class="errorMensager" *ngIf="erroUsuario">{{ erro_msg }}</p>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <div style="display: flex; justify-content: flex-end; width: 100%;">
+    <button mat-button type="button" class="btn-cancel" (click)="onCancel()">Cancelar</button>
+    <button mat-button type="button" class="btn-save" (click)="onLogin()" [disabled]="loginForm.invalid">Entrar</button>
+  </div>
+</mat-dialog-actions>

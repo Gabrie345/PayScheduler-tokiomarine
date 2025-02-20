@@ -73,7 +73,7 @@ export class TransferModalComponent implements AfterViewInit {
         this.totalItems = response.length; 
       },
       error => {
-        console.log(error);
+        this.dialogRef.close();
       }
     );
   }

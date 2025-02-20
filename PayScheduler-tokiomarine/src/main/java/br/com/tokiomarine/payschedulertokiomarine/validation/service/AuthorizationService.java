@@ -32,6 +32,7 @@ public class AuthorizationService implements UserDetailsService {
         AccountUserModel accountUserModel = new AccountUserModel(accountUserDto.getName(),
                 accountUserDto.getCpf(),
                 encryptedPassword);
+        System.out.println(accountUserModel.getBalance());
         return repository.save(accountUserModel);
     }
 
