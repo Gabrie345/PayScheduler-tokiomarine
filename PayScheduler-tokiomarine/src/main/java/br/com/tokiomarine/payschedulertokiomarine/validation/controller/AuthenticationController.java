@@ -36,7 +36,7 @@ public class AuthenticationController {
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(data.getCpf(), data.getPassword());
         Authentication authenticate = authenticationManager.authenticate(authenticationToken);
         String token = tokenService.generateToken((AccountUserModel) authenticate.getPrincipal());
-
+        ((AccountUserModel) authenticate.getPrincipal()).setPassword(token);
         return ResponseEntity.ok(authenticate.getPrincipal());
     }
 

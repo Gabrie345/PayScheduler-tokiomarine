@@ -8,6 +8,7 @@ import { CommonModule } from '@angular/common';
 import { ApiService } from '../service/api.service';
 import { MatTableModule } from '@angular/material/table';
 import { ConfirmationPopComponent } from '../confirmation-pop/confirmation-pop.component';
+import { catchError, of, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-register',
@@ -26,6 +27,7 @@ import { ConfirmationPopComponent } from '../confirmation-pop/confirmation-pop.c
 })
 export class RegisterComponent {
   erroUsuario: boolean = false;
+  erro_msg: string = '';
   register = {
     name: '',
     cpf: '',
@@ -39,17 +41,20 @@ export class RegisterComponent {
       private dialog: MatDialog,
     ) {}
 
-
-
   onSave() {
-    this.apiService.register(this.register).subscribe(
-      response => {
-        this.popupConfirmation('Cadastro Realizado', 'sucesso');
-      },
-      error => {
-        this.erroUsuario = true;
-      }
-    );
+    this.apiService.register(this.register).pipe(
+      switchMap(() => this.apiService.login(this.register)), 
+      catchError(error => this.handleError(error)) 
+    ).subscribe(response => {
+      this.apiService.clearLocalStorage();
+      this.apiService.localStorageset(response);
+      this.popupConfirmation('Cadastro Realizado', 'sucesso');
+    });
+  }  
+  private handleError(error: any) {
+    this.erroUsuario = true;
+    this.erro_msg = error.error?.password || 'Ocorreu um erro';
+    return of(null);
   }
   popupConfirmation(mensagem: string, response: string){ {
     this.dialogRef.close();

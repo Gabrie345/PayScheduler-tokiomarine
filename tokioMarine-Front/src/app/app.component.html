@@ -2,7 +2,7 @@
   <div *ngIf="isLoggedIn" class="header">
     <span class="user-info" >
       <p class="account-number">Conta: 0123456789</p> 
-        <p class="account-number">Saldo: R$ {{ saldo }}</p> 
+        <p class="account-number">Saldo: R$ {{ balance }}</p> 
         <button class="btnLogout" (click)="logout()">Sair</button>
     </span>
   </div>
@@ -22,7 +22,7 @@
     <ng-template #notLoggedIn>
       <div class="botoes">
         <button mat-button class="btn" (click)="login()">Login</button>
-        <button mat-button class="btn" (click)="register()">Registro</button>
+        <button mat-button class="btn" (click)="register()">Cadastro</button>
       </div>
     </ng-template>
     </div>
