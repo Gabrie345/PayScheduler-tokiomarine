@@ -3,7 +3,6 @@ package br.com.tokiomarine.payschedulertokiomarine.validation.controller;
 
 import br.com.tokiomarine.payschedulertokiomarine.validation.dto.AccountUserDto;
 import br.com.tokiomarine.payschedulertokiomarine.validation.dto.AuthenticationDto;
-import br.com.tokiomarine.payschedulertokiomarine.validation.dto.TokenDto;
 import br.com.tokiomarine.payschedulertokiomarine.validation.service.AuthorizationService;
 import br.com.tokiomarine.payschedulertokiomarine.validation.service.TokenService;
 import br.com.tokiomarine.payschedulertokiomarine.validation.service.model.AccountUserModel;
@@ -37,13 +36,15 @@ public class AuthenticationController {
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(data.getCpf(), data.getPassword());
         Authentication authenticate = authenticationManager.authenticate(authenticationToken);
         String token = tokenService.generateToken((AccountUserModel) authenticate.getPrincipal());
-        return ResponseEntity.ok(new TokenDto(token));
+
+        return ResponseEntity.ok(authenticate.getPrincipal());
     }
 
     @PostMapping("/register")
     public ResponseEntity<AccountUserModel> register(@RequestBody @Valid AccountUserDto data){
         AccountUserModel accountUser = serviceAuthorization.userRegistration(data);
         return ResponseEntity.ok(accountUser);
+
     }
 
 }

@@ -6,9 +6,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Collection;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 @Table(name = "ACCOUNT_USER_INFORMATION")
 @Entity
@@ -34,6 +36,8 @@ public class AccountUserModel implements UserDetails {
     private BigDecimal balance;
 
 
+
+
     public AccountUserModel(String name, String cpf, String password) {
         this.originAccount = generateAccountNumber();
         this.name = name;
@@ -42,15 +46,21 @@ public class AccountUserModel implements UserDetails {
         this.balance = generateInitialBalance();
     }
 
+    public BigDecimal getBalance() {
+        return balance;
+    }
+
+    public void setBalance(BigDecimal balance) {
+        this.balance = balance;
+    }
 
     public AccountUserModel() {
         this.originAccount = generateAccountNumber();
     }
 
     private BigDecimal generateInitialBalance() {
-        Random random = new Random();
-        int amount = 1000 + random.nextInt(9001);
-        return BigDecimal.valueOf(amount);
+        double randomValue = ThreadLocalRandom.current().nextDouble(10, 1001);
+        return BigDecimal.valueOf(randomValue).setScale(2, RoundingMode.HALF_UP);
     }
 
     private String generateAccountNumber() {

@@ -18,4 +18,7 @@ export class ApiService {
   listTransfers(account: string): Observable<any> {
     return this.http.get(`${this.baseUrl}/transferencia/listar/${account}`);
   }
+  register(data: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}/authentication/register`, data);
+  }
 }
