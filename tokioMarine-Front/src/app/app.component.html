@@ -1,9 +1,11 @@
 <mat-card appearance="outlined" class="card-maior">
   <div *ngIf="isLoggedIn" class="header">
     <span class="user-info" >
-      <p class="account-number">Conta: 0123456789</p> 
+      <p class="account-number">Conta: {{accountNumber}}</p> 
         <p class="account-number">Saldo: R$ {{ balance }}</p> 
-        <button class="btnLogout" (click)="logout()">Sair</button>
+        <div class="logoutArea">
+          <button class="btnLogout" (click)="logout()">Sair</button>
+        </div>
     </span>
   </div>
   <mat-card-content class="card">
