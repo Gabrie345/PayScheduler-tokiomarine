@@ -32,6 +32,7 @@ import { MatTableModule } from '@angular/material/table';
   ]
 })
 export class ScheduleTransferComponent {
+  isDisabled: boolean = true;
   transfer = {
     conta_origem: '',
     conta_destino: '',
@@ -48,12 +49,17 @@ export class ScheduleTransferComponent {
     private dialog: MatDialog
   ) {}
 
+  ngOnInit() {
+    localStorage.getItem('originAccount');
+    this.transfer.conta_origem = localStorage.getItem('originAccount') || '';
+  }
   onCancel() {
     this.dialogRef.close();
   }
 
   onSave() {
     this.transfer.data_Agendamento = this.dateFormart(this.transfer.data_Agendamento);
+    this.transfer.conta_origem = localStorage.getItem('originAccount') || '';  
     this.apiService.saveTransfer(this.transfer).subscribe(
       response => {
         this.popupConfirmation('Transferência salva com sucesso', 'sucesso');

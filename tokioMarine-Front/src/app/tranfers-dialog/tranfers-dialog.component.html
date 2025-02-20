@@ -4,20 +4,12 @@
     <mat-form-field class="input-form">
       <mat-label>Sua Conta</mat-label>
       <input
-        matInput
-        maxlength="10"
-        minlength="10"
-        [(ngModel)]="transfer.conta_origem"
-        name="conta_origem"
-        #contaOrigem="ngModel"
-        required
+      [(ngModel)]="transfer.conta_origem"
+      name="conta_origem"
+      #contaOrigem="ngModel"
+      required
+      [disabled]="isDisabled"
       >
-      <mat-error *ngIf="contaOrigem.invalid && (contaOrigem.dirty || contaOrigem.touched)">
-        <span *ngIf="contaOrigem.errors?.['required']">Conta de origem é obrigatória.</span>
-        <span *ngIf="contaOrigem.errors?.['minlength'] || contaOrigem.errors?.['maxlength']">
-          A conta de origem deve ter exatamente 10 caracteres.
-        </span>
-      </mat-error>
     </mat-form-field>
 
     <mat-form-field class="input-form">

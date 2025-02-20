@@ -43,9 +43,6 @@ export class AppComponent {
       width: '400px', 
       data: {} 
     });
-    dialogRef.afterClosed().subscribe(result => {
-      this.validaToken();
-    });
   }
 
   openDialog() {
