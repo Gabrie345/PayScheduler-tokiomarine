@@ -61,10 +61,11 @@ export class AppComponent {
   }
 
   listTranfers() {
+
     const dialogRef = this.dialog.open(TransferModalComponent, {
       width: '800px',
       maxWidth: '90vw',
-      data: {originAccount: localStorage.getItem('originAccount')} 
+      data: {originAccount: this.accountNumber} 
     });
     dialogRef.afterClosed().subscribe(result => {
         this.validaToken();
