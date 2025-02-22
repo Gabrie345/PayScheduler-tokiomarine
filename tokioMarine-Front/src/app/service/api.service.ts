@@ -40,13 +40,14 @@ export class ApiService {
     ); 
   }
 
-  listTransfers(account: string): Observable<any> {
+  listTransfers(): Observable<any> {
+    const accountNumber = localStorage.getItem('originAccount')
     const barToken = localStorage.getItem('token');
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${barToken}`
     });
   
-    return this.http.get(`${this.baseUrl}/transferencia/listar/${account}`, { headers })
+    return this.http.get(`${this.baseUrl}/transferencia/listar/${accountNumber}`, { headers })
       .pipe(
         catchError((error) => {
           if (error.status === 403) {

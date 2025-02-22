@@ -57,11 +57,11 @@ export class TransferModalComponent implements AfterViewInit {
   }
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
+    this.request()
   }
 
-  request(account: string): void {
-    console.log(account);
-    this.apiService.listTransfers(account).subscribe(
+  request(): void {
+    this.apiService.listTransfers().subscribe(
       response => {
         this.dataSource.data = response.map((item: Transfer) => ({
           ...item,

@@ -66,6 +66,7 @@ export class ScheduleTransferComponent {
       },
       error => {
         this.popupConfirmation(error?.error?.error, 'erro');
+        console.log(error);
       }
     );
   }
